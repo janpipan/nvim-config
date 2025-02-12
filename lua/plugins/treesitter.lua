@@ -2,7 +2,6 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function ()
-    local configs = 
     require("nvim-treesitter.configs").setup({
       ensure_installed = {  "go",
                             "bash",
@@ -27,5 +26,6 @@ return {
                           },                     
       highlight = { enable = true },
     })
+    vim.treesitter.language.register("yaml", "values")
   end
 }
