@@ -23,6 +23,7 @@ return {
                             "query",
                             "markdown",
                             "markdown_inline",
+                            "json",
                           },                     
       highlight = { enable = true },
     })
