@@ -23,3 +23,9 @@ vim.keymap.set("v", "<leader>d", "\"_d")
 
 -- replace every occurrence of the selected word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left><Left>]])
+
+-- buffers
+vim.keymap.set("n", "<leader>p", "<cmd>bp<cr>")
+vim.keymap.set("n", "<leader>n", "<cmd>bn<cr>")
+vim.keymap.set("n", "<leader>x", "<cmd>bd<cr>")
+

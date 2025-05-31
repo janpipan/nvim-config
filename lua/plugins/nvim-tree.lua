@@ -12,4 +12,7 @@ return {
       },
     }
   end,
+  keys = {
+    {"<leader>e", "<cmd>NvimTreeFindFileToggle<cr>"},
+  },
 }

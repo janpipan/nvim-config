@@ -5,5 +5,6 @@ return {
     {'<leader>pf', '<cmd>Telescope find_files<cr>'},
     {'<leader>ps', function() require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ") }) end,},
     {'<C-p>', '<cmd>Telescope git_files<cr>'},
+    {'<leader>fz', '<cmd>Telescope live_grep<cr>'},
   },
 }
