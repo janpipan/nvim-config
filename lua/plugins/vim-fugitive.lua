@@ -4,4 +4,3 @@ return {
     {'<leader>gs', '<cmd>Git<cr>'},
   }
 }
- 

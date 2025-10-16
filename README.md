@@ -10,5 +10,6 @@ You can install and configre nvim with the following script:
 git clone https://github.com/janpipan/nvim-config.git $HOME/.config/nvim
 
 brew install nvim neovim ripgrep
+npm i -g vscode-langservers-extracted
 ```
 

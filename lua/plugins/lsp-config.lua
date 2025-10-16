@@ -4,8 +4,8 @@ return {
   event = {'BufReadPre', 'BufNewFile'},
   dependencies = {
     {'hrsh7th/cmp-nvim-lsp'},
-    {'williamboman/mason.nvim'},
-    {'williamboman/mason-lspconfig.nvim'},
+    {'mason-org/mason.nvim'},
+    {'mason-org/mason-lspconfig.nvim'},
   },
   init = function()
     -- Reserve a space in the gutter
@@ -15,6 +15,10 @@ return {
   config = function()
     local lspconfig = require('lspconfig')
     local lsp_defaults = lspconfig.util.default_config
+    local luasnip = require("luasnip")
+    require("luasnip.loaders.from_vscode").lazy_load()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     -- Add cmp_nvim_lsp capabilities settings to lspconfig
     -- This should be executed before you configure any language server
@@ -46,22 +50,43 @@ return {
 
     require('mason-lspconfig').setup({
       ensure_installed = {
-        "yamlls",   
+        "yamlls",
         "pyright",
+        "ts_ls",
+        "html",
+        "lua_ls",
+        "gopls",
       },
       handlers = {
         -- this first function is the "default handler"
         -- it applies to every language server without a "custom handler"
         function(server_name)
-          require('lspconfig')[server_name].setup({})
+          lspconfig[server_name].setup({})
+        end,
+        ["gopls"] = function ()
+          lspconfig.gopls.setup({
+            cmd = {"gopls"},
+            filetypes = {"go", "gomod", "gowork", "gotmpl" },
+            root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+          })
+        end,
+        ["html"] = function()
+          lspconfig.html.setup({
+            capabilities = capabilities,
+          })
+        end,
+        ["lua_ls"] = function()
+          lspconfig.lua_ls.setup({
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = {'vim'},
+                },
+              },
+            }
+          })
         end,
       }
-    })
-
-    lspconfig.gopls.setup({
-      cmd = {"gopls"},
-      filetypes = {"go", "gomod", "gowork", "gotmpl" },
-      root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
     })
   end
 }

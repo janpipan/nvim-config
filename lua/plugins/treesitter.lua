@@ -24,7 +24,7 @@ return {
                             "markdown",
                             "markdown_inline",
                             "json",
-                          },                     
+                          },
       highlight = { enable = true },
     })
     vim.treesitter.language.register("yaml", "values")
